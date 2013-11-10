@@ -3,7 +3,8 @@
 #
 
 # self-manage the puppet master server
-node 'puppet' { 
+node 'puppet' {
+  include git 
   include puppetrun
   class { 'helloworld': }
   
@@ -13,11 +14,13 @@ node 'puppet' {
 ##### CLIENTS
 
 node 'client1' {
+  include git
   include puppetrun
   class { 'helloworld': }
 }
 
-node 'client2' { 
+node 'client2' {
+  include git 
   include puppetrun
   class { 'helloworld': }
 }
