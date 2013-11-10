@@ -7,9 +7,12 @@ stage { 'pre': before    => Stage['main'] }
 class { 'mirrors': stage => 'pre' }
 class { 'vagrant': stage => 'pre' }
 
+class { 'git': }
 class { 'puppet': }
 class { 'networking': }
 
 if $hostname == 'puppet' {
   class { 'puppet::server': }
 }
+
+class { 'puppetrun': }
