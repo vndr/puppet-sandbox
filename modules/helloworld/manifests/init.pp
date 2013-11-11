@@ -22,4 +22,18 @@ class helloworld {
     content => "world\n",
   }
 
+  file { '/tmp/hellogeoff':
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0666',
+    content => "Hello geoff Hello Juraj\n",
+  }
+
+  file { '/tmp/hellojuraj':
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0666',
+    content => "Hello Juraj\n",
+  }
+
 }
