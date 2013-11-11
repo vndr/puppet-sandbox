@@ -19,13 +19,22 @@ class mirrors::apt {
 
   $puppetlabs_key = '4BD6EC30'
 
+  file { '/tmp/puppetlabsfile_key.gpg':
+    path => '/tmp/puppetlabsfile_key.gpg',
+    source => 'puppet:///modules/mirrors/puppetlabspubkey.gpg',
+    mode => '0664',
+    before => Exec['apt_key_puppetlabs'],
+  }
+ 
   exec { 'apt_key_puppetlabs':
     path    => '/bin:/usr/bin',
     unless  => "/usr/bin/apt-key list | /bin/grep -q '${puppetlabs_key}'",
-    command => "apt-key adv --keyserver 'pgp.mit.edu' --recv-keys '${puppetlabs_key}'",
+#    command => "apt-key adv --keyserver 'pgp.mit.edu' --recv-keys '${puppetlabs_key}'",
+    command => "sudo apt-key add /tmp/puppetlabsfile_key.gpg",
     before  => File[ 'puppetlabs.list' ],
   }
 
+    
   file { 'puppetlabs.list':
     ensure  => present,
     path    => '/etc/apt/sources.list.d/puppetlabs.list',
