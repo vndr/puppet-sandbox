@@ -19,7 +19,7 @@ class helloworld {
     owner   => 'root',
     group   => 'root',
     mode    => '0666',
-    content => "worldccccc\n",
+    content => "world\n",
   }
 
 }
