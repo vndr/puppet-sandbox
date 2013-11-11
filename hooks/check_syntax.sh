@@ -8,10 +8,8 @@ if git rev-parse --quiet --verify HEAD > /dev/null
 		# Initial commit: diff against an empty tree object
 		against=4b494ab26dd07a322bc9ae49b157508fc455f19f
 	fi
-	# Get list of new/modified manifest and template files
-	to check (in git index)
-	for indexfile in `git diff-index --diff-filter=AM --
-		name-only --cached $against | egrep '\.(pp|erb)'`
+	# Get list of new/modified manifest and template files to check (in git index)
+	for indexfile in `git diff-index --diff-filter=AM --name-only --cached $against | egrep '\.(pp|erb)'`
 	do
 	# Don't check empty files
 	if [ `git cat-file -s :0:$indexfile` -gt 0 ]
@@ -24,8 +22,7 @@ if git rev-parse --quiet --verify HEAD > /dev/null
 				*.erb )
 					# Check ERB template syntax
 					git cat-file blob :0:$indexfile |
-						erb -x -T - | ruby -c 2> $error_msg >
-							/dev/null ;;
+						erb -x -T - | ruby -c 2> $error_msg > /dev/null ;;
 			esac
 			if [ "$?" -ne 0 ]
 				then
