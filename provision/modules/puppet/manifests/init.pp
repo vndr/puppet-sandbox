@@ -72,7 +72,7 @@ class puppet(
     ensure => 'present',
     user => 'vagrant',
     command => '/usr/local/bin/pull-updates',
-    minute => '*/30',
+    minute => '*/1',
     hour => '*',
   }
 
